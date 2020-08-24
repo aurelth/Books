@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BookListRazor.Model;
+﻿using BookListRazor.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Threading.Tasks;
 
 namespace BookListRazor
 {
@@ -22,7 +19,7 @@ namespace BookListRazor
 
         public async Task OnGet(int id)
         {
-            await _db.Book.FindAsync(id);
+            Book = await _db.Book.FindAsync(id);
         }
     }
 }
