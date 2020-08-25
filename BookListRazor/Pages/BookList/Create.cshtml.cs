@@ -18,7 +18,6 @@ namespace BookListRazor
         public Book Book { get; set; }
         public void OnGet()
         {
-
         }
 
         public async Task<IActionResult> OnPost()
