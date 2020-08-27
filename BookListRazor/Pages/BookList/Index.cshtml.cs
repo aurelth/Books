@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BookListRazor.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using BookListRazor.Model;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BookListRazor
 {
@@ -29,15 +26,14 @@ namespace BookListRazor
         public async Task<IActionResult> OnPostDelete(int id)
         {
             var book = await _db.Book.FindAsync(id);
-            if(book == null)
+            if(book != null)
             {
-                return NotFound();
+                _db.Book.Remove(book);
+                await _db.SaveChangesAsync();
+                return RedirectToPage("Index");                
             }
 
-            _db.Book.Remove(book);
-            await _db.SaveChangesAsync();
-
-            return RedirectToPage("Index");
+            return NotFound();
         }
     }
 }
